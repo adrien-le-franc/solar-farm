@@ -1,0 +1,10 @@
+import numpy as np
+import os
+from numpy.random import randint
+from solar_farm import SolarFarm
+
+solar_farm = SolarFarm()
+t = 0
+load = np.zeros(48)
+load = solar_farm.update_battery_stock(t,load)
+print('test passed')
