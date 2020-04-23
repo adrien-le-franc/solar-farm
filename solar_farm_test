@@ -3,8 +3,13 @@ import os
 from numpy.random import randint
 from solar_farm import SolarFarm
 
+capacity = 100
+max_load = 70
 solar_farm = SolarFarm()
-t = 0
-load = np.zeros(48)
-load = solar_farm.update_battery_stock(t,load)
+
+for t in range(48):
+    load = solar_farm.compute_load(t)
+
+print(solar_farm.load)
+print(solar_farm.battery_stock)
 print('test passed')
