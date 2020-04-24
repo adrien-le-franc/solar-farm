@@ -88,13 +88,13 @@ class Player:
 
         
 
-    def compute_load(self,time,data_scenario):
+    def compute_load(self,time,sun):
 
         load_player = self.take_decision(time)
 
         load_battery=self.update_battery_stock(time,load_player)
 
-        self.load[time]=load_battery - data_scenario["sun"]
+        self.load[time]=load_battery - sun
 
         
 
@@ -102,9 +102,9 @@ class Player:
 
     
 
-    def observe(self, t, data, price, imbalance):
+    def observe(self, t, sun, price, imbalance):
 
-        self.sun.append(data["sun"])
+        self.sun.append(sun)
 
         
 
