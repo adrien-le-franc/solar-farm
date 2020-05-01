@@ -16,6 +16,4 @@ for t in range(48):
     imbalance = {"demand" : 0.5 , "supply" : 1}
     solar_farm.observe(t,production,data,imbalance)
 
-    print(solar_farm.battery_stock[t])
-
 print('test passed')
