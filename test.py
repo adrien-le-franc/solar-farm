@@ -12,8 +12,8 @@ for t in range(48):
     load = solar_farm.compute_load(t, production)
     assert solar_farm.battery_stock[t] >= 0
     assert solar_farm.battery_stock[t] <= solar_farm.capacity
-    data = {"internal" : 0.06 ,"external_purchase" : 0.1,"external_sale" : 0.03}
-    imbalance = {"demand" : 0.5 , "supply" : 1}
+    data = {"purchase" : 0.06 ,"sale" : 0.03}
+    imbalance = {"purchase_cover" : 0.5 , "sale_cover" : 1}
     solar_farm.observe(t,production,data,imbalance)
 
 print('test passed')

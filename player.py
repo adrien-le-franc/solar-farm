@@ -13,8 +13,8 @@ class Player:
         self.battery_stock = np.zeros(49) #a(t)
         self.capacity = 100
         self.max_load = 70
-        self.prices = {"internal" : [],"external_purchase" : [],"external_sale" : []}
-        self.imbalance=[]
+        self.prices = {"purchase" : [],"sale" : []}
+        self.imbalance={"purchase_cover":[], "sale_cover": []}
 
     def take_decision(self, time):
 
@@ -58,12 +58,11 @@ class Player:
     def observe(self, t, sun, price, imbalance):
         self.sun.append(sun)
         
-        self.prices["internal"].append(price["internal"])
-        self.prices["external_sale"].append(price["external_sale"])
-        self.prices["external_purchase"].append(price["external_purchase"])
-        
-        self.imbalance.append(imbalance)
-        
+        self.prices["purchase"].append(price["purchase"])
+        self.prices["sale"].append(price["sale"])
+
+        self.imbalance["purchase_cover"].append(imbalance["purchase_cover"])
+        self.imbalance["sale_cover"].append(imbalance["sale_cover"])
     
     def reset(self):
         self.load= np.zeros(48)
@@ -74,5 +73,6 @@ class Player:
         self.battery_stock[0] = last_bat
         
         self.sun=[]
-        self.prices = {"internal" : [],"external_purchase" : [],"external_sale" : []}
-        self.imbalance=[]
+        self.prices = {"purchase" : [],"sale" : []}
+        self.imbalance={"purchase_cover":[], "sale_cover": []}
+
