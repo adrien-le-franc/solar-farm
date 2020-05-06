@@ -1,15 +1,18 @@
-import numpy as np
-import os
-from numpy.random import randint
-from solar_farm import SolarFarm
 
-capacity = 100
-max_load = 70
-solar_farm = SolarFarm()
+from player import Player
+import random as rd
+rd.seed()
+
+
+solar_farm = Player()
 
 for t in range(48):
-    load = solar_farm.compute_load(t)
+    sun = -rd.random()*100
+    load = solar_farm.compute_load(t,sun)
+    assert solar_farm.battery_stock[t] >= 0
+    assert solar_farm.battery_stock[t] <= solar_farm.capacity
+    price = {"purchase" : 0.07 ,"sale" : 0.07}
+    imbalance={"purchase_cover": 0.5, "sale_cover": 1}
+    solar_farm.observe(t,sun,price,imbalance)
 
-print(solar_farm.load)
-print(solar_farm.battery_stock)
 print('test passed')
