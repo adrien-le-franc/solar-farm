@@ -10,6 +10,8 @@ class Player:
         self.sun=[]
         self.bill = np.zeros(48) # prix de vente de l'électricité
         self.load= np.zeros(48) # chargement de la batterie (li)
+        self.penalty=np.zeros(48)
+        self.grid_relative_load=np.zeros(48)
         self.battery_stock = np.zeros(49) #a(t)
         self.capacity = 100
         self.max_load = 70
@@ -21,11 +23,9 @@ class Player:
             # TO DO:
             # implement your policy here to return the load charged / discharged in the battery
             # below is a simple example
-            
-            if time>20 and time<35:
-                return -8
-            else:
-                return +5
+                
+            return 0
+                
 
     def update_battery_stock(self, time,load):
             if abs(load) > self.max_load:
@@ -55,7 +55,7 @@ class Player:
         
         return self.load[time]
     
-    def observe(self, t, sun, price, imbalance):
+    def observe(self, t, sun, price, imbalance,grid_relative_load):
         self.sun.append(sun)
         
         self.prices["purchase"].append(price["purchase"])
@@ -63,10 +63,13 @@ class Player:
 
         self.imbalance["purchase_cover"].append(imbalance["purchase_cover"])
         self.imbalance["sale_cover"].append(imbalance["sale_cover"])
+        self.grid_relative_load[t]=grid_relative_load
     
     def reset(self):
         self.load= np.zeros(48)
         self.bill = np.zeros(48)
+        self.penalty=np.zeros(48)
+        self.grid_relative_load=np.zeros(48)
         
         last_bat = self.battery_stock[-1]
         self.battery_stock = np.zeros(49)
